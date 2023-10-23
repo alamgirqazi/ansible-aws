@@ -1,0 +1,39 @@
+---
+- name: Install Git, Htop, and NTP and ensure NTP service is up
+  hosts: servers
+  become: yes
+  become_user: root
+
+  tasks:
+
+    # - name: Remove APT Lock Files
+    #   file:
+    #     path: "{{ item }}"
+    #     state: absent
+    #   with_items:
+    #     - /var/lib/apt/lists/lock
+    #     - /var/cache/apt/archives/lock
+    #     - /var/lib/dpkg/lock
+
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Git and Htop
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - htop
+
+    - name: Install NTP
+      apt:
+        name: ntp
+        state: present
+
+    - name: Ensure NTP service is running and enabled
+      service:
+        name: ntp
+        state: started
+        enabled: yes

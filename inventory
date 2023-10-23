@@ -1,0 +1,6 @@
+[servers]
+54.91.179.59 ansible_ssh_user=ubuntu
+54.87.34.145 ansible_ssh_user=ubuntu
+
+[db]
+54.91.179.59 ansible_ssh_user=ubuntu
